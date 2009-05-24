@@ -1,8 +1,12 @@
 require 'action_view'
+require File.dirname(__FILE__) + '/swfobject_view_helper.rb'
+
 
 module ActionView #:nodoc:
   module Helpers # :nodoc:
     module AppletHelper # :nodoc:
+      include SwfObjectHelper
+
       def self.included(base)
         base.class_eval do
           include InstanceMethods
@@ -37,15 +41,18 @@ module ActionView #:nodoc:
         # debug flag set, instead.
         def applet_tag(source, options={})
           path = applet_path(source)
-          if ENV['RAILS_ENV'] == 'development' and (ENV['OPENLASZLO_PATH'] || ENV['OPENLASZLO_URL'])
+#         puts '----------------------'
+#         puts 'path = '+ path.to_s
+          if !EnvChecker.production? and (ENV['OPENLASZLO_PATH'] || ENV['OPENLASZLO_URL'])
             # This `require` is inside the conditional because we
             # don't need this, or the gem that it requires, in
             # production
             require 'openlaszlo_build_support'
-            if params.include?('debug')
+            if params.include?('debug')  
               options[:id] ||= File.basename(source, '.swf')
               source += '-debug'
               path = path_path(source)
+#              puts 'path = '+ path.to_s
             end
             OpenLaszlo::Rails::update_asset(path)
           end
