@@ -1,9 +1,9 @@
-require File.expand_path(File.dirname(__FILE__) + '/plugin_spec_helper')
-require File.expand_path(File.dirname(__FILE__) + "/../lib/swfobject_view_helper")
+require File.expand_path(File.dirname(__FILE__) + '/../plugin_spec_helper')
+require File.expand_path(File.dirname(__FILE__) + "/../../lib/swfobject_view_helper")
 
 include ActionView::Helpers
 
-describe SwfObjectHelper, :type => :helper do
+describe SwfObjectHelper do
   include SwfObjectHelper
   
   describe :swfobject_tag do

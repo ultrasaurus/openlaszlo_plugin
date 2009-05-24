@@ -1,9 +1,9 @@
-require File.expand_path(File.dirname(__FILE__) + '/plugin_spec_helper')
-require File.expand_path(File.dirname(__FILE__) + "/../lib/applet_view_helper")
+require File.expand_path(File.dirname(__FILE__) + '/../plugin_spec_helper')
+require File.expand_path(File.dirname(__FILE__) + "/../../lib/applet_view_helper")
 
 include ActionView::Helpers
 
-describe AppletHelper, :type => :helper  do
+describe AppletHelper  do
   include AppletHelper
 
   describe :applet_tag do
