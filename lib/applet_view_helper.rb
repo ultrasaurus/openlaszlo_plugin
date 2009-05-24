@@ -41,9 +41,7 @@ module ActionView #:nodoc:
         # debug flag set, instead.
         def applet_tag(source, options={})
           path = applet_path(source)
-#         puts '----------------------'
-#         puts 'path = '+ path.to_s
-          if !EnvChecker.production? and (ENV['OPENLASZLO_PATH'] || ENV['OPENLASZLO_URL'])
+          if !EnvChecker.production? && (ENV['OPENLASZLO_PATH'] || ENV['OPENLASZLO_URL'])
             # This `require` is inside the conditional because we
             # don't need this, or the gem that it requires, in
             # production
@@ -52,7 +50,6 @@ module ActionView #:nodoc:
               options[:id] ||= File.basename(source, '.swf')
               source += '-debug'
               path = path_path(source)
-#              puts 'path = '+ path.to_s
             end
             OpenLaszlo::Rails::update_asset(path)
           end

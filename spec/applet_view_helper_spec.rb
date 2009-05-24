@@ -10,7 +10,7 @@ describe AppletHelper, :type => :helper  do
     before(:each) do
       EnvChecker.stub!(:development?).and_return(false)
       EnvChecker.stub!(:production?).and_return(true)
-      #self.stub!(:compute_public_path).and_return('/applets/url.swf')
+      OpenLaszlo::Rails.stub!(:update_asset).and_return(true)
     end
 
     it "should call swfobject.embedSWF" do
@@ -23,7 +23,7 @@ describe AppletHelper, :type => :helper  do
       EnvChecker.stub!(:development?).and_return(true)
       EnvChecker.stub!(:production?).and_return(false)
       params[:debug] = "true"
-      html = applet_tag("url")
+      html = applet_tag("url", :verify_file_exists => false)
       html.should have_tag('script', /swfobject.embedSWF/)
       html.should have_tag('script', /"\/applets\/url-debug.swf"/)
     end
