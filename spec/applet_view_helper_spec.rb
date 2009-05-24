@@ -10,7 +10,7 @@ describe AppletHelper, :type => :helper  do
     before(:each) do
       EnvChecker.stub!(:development?).and_return(false)
       EnvChecker.stub!(:production?).and_return(true)
-      OpenLaszlo::Rails.stub!(:update_asset).and_return(true)
+      OpenLaszlo::Rails.stub!(:update_asset).and_return
     end
 
     it "should call swfobject.embedSWF" do

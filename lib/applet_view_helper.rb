@@ -49,7 +49,7 @@ module ActionView #:nodoc:
             if params.include?('debug')  
               options[:id] ||= File.basename(source, '.swf')
               source += '-debug'
-              path = path_path(source)
+              path = applet_path(source)
             end
             OpenLaszlo::Rails::update_asset(path)
           end
