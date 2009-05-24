@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + "/env_checker")
 require 'action_view'
 
 module ActionView #:nodoc:
@@ -48,7 +49,7 @@ module ActionView #:nodoc:
         # * <tt>:verify_file_exists</tt> - if true, the return value will cause the browser to display a diagnostic message if the Flash object does not exist.
         def swfobject_tag(source, options={})
           path = swfobject_path(source)
-          verify_file_exists = options.fetch(:verify_file_exists, ENV['RAILS_ENV'] == 'development')
+          verify_file_exists = options.fetch(:verify_file_exists, EnvChecker.development?)
           if verify_file_exists and not File.exists?(File.join(RAILS_ROOT, 'public', path).sub(/\?\d+/, ''))
             return "<div><strong>Warning:</strong> The file <code>#{File.join('public', path)}</code> does not exist.  Execute <tt>rake openlaszlo:build:applets</tt> to create it.</div>"
           end
@@ -61,7 +62,7 @@ module ActionView #:nodoc:
           variables = options.fetch(:variables, {:lzproxied => false})
           parameters = options.fetch(:parameters, {:scale => 'noscale'})
           fallback_html = options[:fallback_html] || %q{<p>Requires the Flash plugin.  If the plugin is already installed, click <a href="?detectflash=false">here</a>.</p>}
-          if options.fetch(:check_for_javascript_include, ENV['RAILS_ENV'] == 'development')
+          if options.fetch(:check_for_javascript_include, EnvChecker.development?)
             check_for_javascript = <<-"EOF"
               if (typeof swfobject == 'undefined') document.getElementById('#{id}').innerHTML = '<strong>Warning:</strong> <code>swfobject</code> is undefined.  Did you forget to include <code>&lt;%= javascript_include_tag :defaults %></code> in your view file?';
           EOF

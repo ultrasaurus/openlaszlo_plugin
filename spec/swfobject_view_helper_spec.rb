@@ -3,12 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + "/../lib/swfobject_view_helper
 
 include ActionView::Helpers
 
-describe SwfObjectHelper do
+describe SwfObjectHelper, :type => :helper do
   include SwfObjectHelper
   
   describe :swfobject_tag do
     before(:each) do
-      ENV['RAILS_ENV'] = 'production'
+      EnvChecker.stub!(:development?).and_return(false)
+      EnvChecker.stub!(:production?).and_return(true)
       self.stub!(:compute_public_path).and_return('/applets/url.swf')
     end
     
@@ -19,8 +20,11 @@ describe SwfObjectHelper do
     end
     
     it "should check for the js fn, in development mode " do
-      ENV['RAILS_ENV'] = 'development'
+      EnvChecker.stub!(:development?).and_return(true)
+      EnvChecker.stub!(:production?).and_return(false)      
       html = swfobject_tag("url", :verify_file_exists => false)
+
+      # helpful reminder to developers if the javascript isn't there'
       html.should have_tag('script', /Did you forget to include/)
     end
     
@@ -32,7 +36,7 @@ describe SwfObjectHelper do
     
     it "should default to version 8" do
       html = swfobject_tag("url")
-      html.should have_tag('script', /"8", \{/)
+      html.should have_tag('script', /"8,0,24,0"/)
     end
     
     it "should set the id" do
