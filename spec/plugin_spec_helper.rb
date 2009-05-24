@@ -1,4 +1,11 @@
-raise "this spec require rspec_on_rails, and can only be run within an application that includes it" unless File.expand_path(File.dirname(__FILE__)) =~ %r|/vendor/plugins/| and File.directory?(File.dirname(__FILE__) + '/../../rspec_on_rails')
+begin
+  require File.dirname(__FILE__) + '/../../../../spec/spec_helper'
+rescue LoadError
+  puts "You need to install rspec in your base app"
+  exit
+end
 
-require 'spec'
-require File.dirname(__FILE__) + '/../../rspec_on_rails/spec/spec_helper.rb'
+# just enough infrastructure to get 'assert_select' to work
+require 'action_controller'
+require 'action_controller/assertions/selector_assertions'
+include ActionController::Assertions::SelectorAssertions
