@@ -33,7 +33,7 @@ only in your dev enviroment.
 
 In the above example the corresponding OpenLaszlo source file
 (the .lzx file which declared the canvas) is
-expected to be in +/app/applets/myplayer/main.lzx+
+expected to be in /app/applets/myplayer/mplayer.lzx or /app/applets/myplayer/main.lzx
 
 === Generators
 
@@ -147,3 +147,4 @@ The instructions for setting up an Open<tt></tt>Laszlo compile server are {here}
 
 * {Oliver Steele}[osteele.com]
 * Max Carlson
+* {Sarah Allen}[ultrasaurus.com]
