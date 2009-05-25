@@ -9,17 +9,31 @@ For example, the following shell command will create an Open<tt></tt>Laszlo appl
   $ ./script/generate applet contact applet
 
 
-=== View Helper
+=== View Helpers
 
 The plugin introduces two view helpers.  +swfobject_tag+ generates
 code that embeds a flash object in the page (using the
 swfobject[http://code.google.com/p/swfobject/] JavaScript library).
+To use this you can put the following in your view erb file:
+
+  <%= swfobject_tag "httppath/to/myfile.swf" =>
+
+  <%= swfobject_tag "httppath/to/videplayer.swf" :width => 400, :height => 300, :variables => {:url => @video.url} %>
+
+
 +applet_tag+ additionally recompiles the applet if it is out of date,
 and swaps in a version of the applet compiled with the debug flag set
 if the +debug+ query parameter is present in the request that resulted
 in the call -- both of these additional features are available only in
-development mode.
+development mode.  In production, it will simply include the swf
+allowing for the OpenLazlo server or compilation tools to be present
+only in your dev enviroment.
 
+  <%= applet_tag  "myplayer", :width => 400, :height => 300, :variables => {:url => @video.url} %>
+
+In the above example the corresponding OpenLaszlo source file
+(the .lzx file which declared the canvas) is
+expected to be in +/app/applets/myplayer/main.lzx+
 
 === Generators
 
