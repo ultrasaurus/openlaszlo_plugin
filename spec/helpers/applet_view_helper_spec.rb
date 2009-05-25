@@ -11,9 +11,6 @@ describe AppletHelper  do
     before(:each) do
       EnvChecker.stub!(:development?).and_return(false)
       EnvChecker.stub!(:production?).and_return(true)
-#      OpenLaszlo::Rails.stub!(:update_asset).and_return
-#      mock("OpenLaszlo::Rails", :null_object => true)
-#      stub("OpenLaszlo::Rails", :update_asset => nil)
     end
 
     it "should call swfobject.embedSWF" do
