@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../plugin_spec_helper')
 require File.expand_path(File.dirname(__FILE__) + "/../../lib/applet_view_helper")
 
 include ActionView::Helpers
+require 'openlaszlo_build_support'
 
 describe AppletHelper  do
   include AppletHelper
@@ -10,7 +11,9 @@ describe AppletHelper  do
     before(:each) do
       EnvChecker.stub!(:development?).and_return(false)
       EnvChecker.stub!(:production?).and_return(true)
-      OpenLaszlo::Rails.stub!(:update_asset).and_return
+#      OpenLaszlo::Rails.stub!(:update_asset).and_return
+#      mock("OpenLaszlo::Rails", :null_object => true)
+#      stub("OpenLaszlo::Rails", :update_asset => nil)
     end
 
     it "should call swfobject.embedSWF" do
@@ -20,8 +23,12 @@ describe AppletHelper  do
     end
 
     it "should compile debug swf when debug option is set" do
+      # don't need to stub this in production, since it doesn't compile then'
+      OpenLaszlo::Rails.stub(:update_asset)
+      # mock development
       EnvChecker.stub!(:development?).and_return(true)
       EnvChecker.stub!(:production?).and_return(false)
+
       params[:debug] = "true"
       html = applet_tag("url", :verify_file_exists => false)
       html.should have_tag('script', /swfobject.embedSWF/)
