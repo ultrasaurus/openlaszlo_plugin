@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/view_helper_spec_helper')
-require File.expand_path(File.dirname(__FILE__) + "/../../lib/applet_view_helper")
+require File.expand_path(File.dirname(__FILE__) + "/../../lib/helpers/applet_view_helper")
 
 include ActionView::Helpers
 require 'openlaszlo_build_support'

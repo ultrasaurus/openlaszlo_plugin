@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + "/env_checker")
+require File.expand_path(File.dirname(__FILE__) + "/../env_checker")
 require 'action_view'
 
 module ActionView #:nodoc:

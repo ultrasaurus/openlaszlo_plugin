@@ -1,5 +1,5 @@
-require 'applet_view_helper'
-require 'swfobject_view_helper'
+require 'helpers/applet_view_helper'
+require 'helpers/swfobject_view_helper'
 ActionView::Helpers::AssetTagHelper.register_javascript_include_default 'swfobject'
 
 begin

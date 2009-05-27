@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/view_helper_spec_helper')
-require File.expand_path(File.dirname(__FILE__) + "/../../lib/swfobject_view_helper")
+require File.expand_path(File.dirname(__FILE__) + "/../../lib/helpers/swfobject_view_helper")
 
 include ActionView::Helpers
 
