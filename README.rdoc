@@ -33,7 +33,7 @@ only in your dev enviroment.
 
 In the above example the corresponding OpenLaszlo source file
 (the .lzx file which declared the canvas) is
-expected to be in /app/applets/myplayer/mplayer.lzx or /app/applets/myplayer/main.lzx
+expected to be in /app/applets/myplayer/myplayer.lzx or /app/applets/myplayer/main.lzx
 
 === Generators
 
@@ -103,7 +103,7 @@ a starter applet that's served from <tt>/home/applet</tt>, do one of:
   $ sudo rake gems:install
 
 3: Install this plugin:
-  $ ./script/plugin install git://github.com/osteele/openlaszlo_plugin.git
+  $ ./script/plugin install git://github.com/ultrasaurus/openlaszlo_plugin.git
 
 4: Set the +OPENLASZLO_HOME+ environment variable to the directory that contains the Open<tt></tt>Laszlo SDK.  The first line below is an example of this in bash (although
 you will probably want to put this in your <tt>.bashrc</tt> or <tt>.profile</tt> too).
