@@ -2,11 +2,11 @@
 # since it can later be stubbed for testing
 
 class EnvChecker
-  def production?
+  def self.production?
     ENV['RAILS_ENV'] == 'production'
   end
 
-  def development?
+  def self.development?
     ENV['RAILS_ENV'] == 'development'
   end
 end
